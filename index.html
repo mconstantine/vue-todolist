@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TODO List</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./index.css" />
+  </head>
+  <body>
+    <div id="root">
+      <div class="container-fluid">
+        <!-- Input -->
+        <div class="row justify-content-center">
+          <div class="col col-5">
+            <input
+              type="text"
+              class="form-control"
+              v-model="newTodo.text"
+              @keyup.enter="addTodo"
+            />
+          </div>
+          <div class="col col-2">
+            <button class="btn btn-primary" @click="addTodo">Add todo</button>
+          </div>
+        </div>
+        <div class="row">
+          <!-- Todo List -->
+          <div class="list-group">
+            <!-- List item template -->
+            <div
+              class="list-group-item d-flex justify-content-between align-items-center"
+              v-for="(todo, index) in todosList"
+              :class="{ done: todo.done }"
+              @click="toggleDoneState(index)"
+            >
+              <label>
+                <input
+                  class="form-check-input me-1"
+                  type="checkbox"
+                  v-model="todo.done"
+                />
+                <span>{{ todo.text }}</span>
+              </label>
+              <button class="btn btn-danger" @click.stop="removeTodo(index)">
+                Remove
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="./index.js"></script>
+  </body>
+</html>
